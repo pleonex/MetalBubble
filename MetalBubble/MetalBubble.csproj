@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>MetalBubble</AssemblyName>
+    <Version>1.0.0</Version>
+    <Description>Program to sort items in Metal Max 3.</Description>
+
+    <Authors>pleonex</Authors>
+    <Copyright>Copyright (c) 2019 Benito Palacios Sanchez</Copyright>
+    <License>GPL-3.0-or-later</License>
+    <PackageTags>translation;localization;romhacking;fan-translation</PackageTags>
+
+    <TargetFrameworks>netcoreapp2.1;net472</TargetFrameworks>
+    <RootNamespace>MetalBubble</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Yarhl" Version="3.0.0-alpha01" />
+  </ItemGroup>
+
+</Project>
