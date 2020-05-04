@@ -16,7 +16,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace MetalBubble
 {
-    using System;
     using System.Collections.ObjectModel;
     using Yarhl.FileFormat;
 

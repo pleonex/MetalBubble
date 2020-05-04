@@ -19,7 +19,6 @@ namespace MetalBubble
     using System;
     using System.Text;
     using Yarhl.FileFormat;
-    using Yarhl.FileSystem;
     using Yarhl.IO;
 
     public class ArrName2ItemList :

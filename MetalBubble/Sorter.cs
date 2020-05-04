@@ -16,22 +16,18 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace MetalBubble
 {
-    using System.Collections.Generic;
     using System.Linq;
-    using Yarhl.FileFormat;
     using Yarhl.IO;
 
     public static class Sorter
     {
-        const uint SortedItemsTableAddress = 0x0E8094;
-
-        public static void UpdateItemsTable(BinaryFormat arm9, ItemList items)
+        public static void UpdateItemsTable(BinaryFormat arm9, ItemList items, uint table)
         {
             var writer = new DataWriter(arm9.Stream);
 
             var sorted = items.Items.OrderBy(x => x.Name).ToList();
             for (int i = 0; i < sorted.Count; i++) {
-                arm9.Stream.Seek(SortedItemsTableAddress + (sorted[i].Id * 2));
+                arm9.Stream.Seek(table + (sorted[i].Id * 2));
                 writer.Write((ushort)i);
             }
         }

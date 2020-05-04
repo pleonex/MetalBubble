@@ -17,11 +17,10 @@
 namespace MetalBubble
 {
     using System;
-    using System.IO;
     using System.Reflection;
     using Yarhl.IO;
-    using Yarhl.FileFormat;
     using Yarhl.FileSystem;
+    using System.Globalization;
 
     public class Program
     {
@@ -31,9 +30,9 @@ namespace MetalBubble
                 "MetalBubble v{0} -- Item sorter for Metal Max 3 ~~ by pleonex",
                 Assembly.GetExecutingAssembly().GetName().Version);
 
-            if (args.Length != 2) {
+            if (args.Length != 3) {
                 Console.WriteLine("Invalid number of arguments");
-                Console.WriteLine("USAGE: MetalBubble <xls/pack_data.pak> <arm9.bin>");
+                Console.WriteLine("USAGE: MetalBubble <xls/pack_data.pak> <arm9.bin> <tableAddress>");
                 Environment.Exit(-1);
             }
 
@@ -41,6 +40,16 @@ namespace MetalBubble
 
             string packPath = args[0];
             string arm9Path = args[1];
+            bool successParsing = uint.TryParse(
+                args[2],
+                NumberStyles.HexNumber,
+                CultureInfo.InvariantCulture,
+                out uint table);
+
+            if (!successParsing) {
+                Console.WriteLine("Invalid hexadecimal number in third argument");
+                Environment.Exit(-2);
+            }
 
             using (Node pack = NodeFactory.FromFile(packPath))
             using (Node arm9 = NodeFactory.FromFile(arm9Path)) {
@@ -53,7 +62,8 @@ namespace MetalBubble
 
                 Sorter.UpdateItemsTable(
                     arm9.GetFormatAs<BinaryFormat>(),
-                    itemListInfo.GetFormatAs<ItemList>());
+                    itemListInfo.GetFormatAs<ItemList>(),
+                    table);
             }
 
             Console.WriteLine("Done!");
